@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: subash-portfolio-api
+  datasource:
+    url: ${DB_URL:jdbc:h2:file:./data/subash_portfolio}
+    username: ${DB_USERNAME:sa}
+    password: ${DB_PASSWORD:}
+    driver-class-name: ${DB_DRIVER:org.h2.Driver}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+  h2:
+    console:
+      enabled: true
+
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+app:
+  allowed-origins: ${ALLOWED_ORIGINS:http://localhost:4200}

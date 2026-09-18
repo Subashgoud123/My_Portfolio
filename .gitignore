@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+
+# Angular build and cache output
+subash-portfolio/frontend/dist/
+subash-portfolio/frontend/.angular/
+
+# Java / Maven build output
+**/target/
+
+# Local database and runtime data
+*.db
+*.db-shm
+*.db-wal
+*.mv.db
+subash-portfolio/backend/data/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE and editor files
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.iml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Coverage and temporary files
+coverage/
+*.tmp
+*.temp

@@ -1,0 +1,8 @@
+html { scroll-behavior: smooth; }
+body { margin: 0; background: #07101c; }
+button, a { -webkit-tap-highlight-color: transparent; }
+::selection { background: rgba(110,231,255,.25); color: white; }
+::-webkit-scrollbar { width: 9px; }
+::-webkit-scrollbar-track { background: #06101a; }
+::-webkit-scrollbar-thumb { background: #22334a; border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: #36516f; }

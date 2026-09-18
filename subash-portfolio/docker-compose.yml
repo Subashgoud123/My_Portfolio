@@ -1,0 +1,22 @@
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8080:8080"
+    environment:
+      DB_URL: jdbc:h2:file:/app/data/subash_portfolio
+      DB_USERNAME: sa
+      DB_PASSWORD:
+      ALLOWED_ORIGINS: http://localhost:4200
+    volumes:
+      - portfolio-data:/app/data
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
+
+volumes:
+  portfolio-data:
