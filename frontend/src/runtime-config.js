@@ -1,0 +1,1 @@
+globalThis.__API_URL__ = "http://localhost:8080";

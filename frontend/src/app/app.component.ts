@@ -49,10 +49,6 @@ export class AppComponent implements OnInit {
     this.service.experience().subscribe(data => this.experience = data);
     this.service.education().subscribe(data => this.education = data);
     this.service.projects().subscribe(data => this.projects = data);
-    this.service.certifications().subscribe(data => {
-      const apiCerts = data as Certificate[];
-      if (apiCerts?.length) this.certifications = apiCerts;
-    });
   }
 
   @HostListener('window:scroll')
@@ -74,14 +70,12 @@ export class AppComponent implements OnInit {
   }
 
   downloadResume(): void {
-    const url = 'PASTE_GOOGLE_DRIVE_RESUME_VIEW_LINK_HERE';
-    if (!url.includes('PASTE_')) window.open(url, '_blank', 'noopener');
-    else alert('Add your Google Drive resume link in app.component.ts.');
+    window.open('/assets/Ediga_Subash_Goud_Resume.pdf', '_blank', 'noopener');
   }
 
   openDrive(url: string): void {
-    if (!url || url.includes('PASTE_')) {
-      alert('Add the Google Drive view link for this credential first.');
+    if (!url) {
+      alert('This credential file is not available yet.');
       return;
     }
     window.open(url, '_blank', 'noopener');

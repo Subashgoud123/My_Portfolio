@@ -1,7 +1,7 @@
 <header class="nav" [class.scrolled]="scrolled">
   <button class="brand" (click)="scrollTo('home')">
     <span class="brand-mark">SG</span>
-    <span>SUBASH<span class="accent">.</span></span>
+    <span>SUBASH GOUD<span class="accent">.</span></span>
   </button>
 
   <nav [class.open]="menuOpen">
@@ -97,6 +97,10 @@
       </div>
 
       <div class="about-panel reveal">
+        <div class="profile-photo-card">
+          <img src="/assets/Ediga_Subash_Goud.png" alt="Subash Goud Ediga">
+          <span>JAVA BACKEND<br>DEVELOPER</span>
+        </div>
         <div class="mini-label">CURRENT STACK</div>
         <div class="stack-pills">
           <span>Java</span><span>Jersey</span><span>Spring Boot</span><span>SQL</span>
@@ -197,7 +201,7 @@
     </div>
 
     <div class="credential-intro reveal">
-      <p>Selected credentials are shown first. Every card is wired for a Google Drive viewer link, so a recruiter can open the actual document instead of trusting a text-only list.</p>
+      <p>Selected credentials are shown first. Each card opens the supplied certificate in a new browser tab for immediate viewing.</p>
       <span class="credential-count">{{ certifications.length }} records in master profile</span>
     </div>
 
@@ -215,11 +219,11 @@
       <button class="carousel-btn right" (click)="nextCert()" [disabled]="certIndex >= featuredCertificates().length - 3">→</button>
     </div>
 
-    <div class="cert-note reveal">
+    <!-- <div class="cert-note reveal">
       <b>Verification-first design.</b>
       The supplied certificate inventory identifies 44 records. The public showcase intentionally avoids the Udemy certificate
       issued to “Bindu Ediga” and the AICTE Student Learning Assessment because the inventory says they should not be presented as your professional certifications.
-    </div>
+    </div> -->
   </section>
 
   <section class="section education-section">

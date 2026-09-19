@@ -113,3 +113,21 @@ The included `application.yml` uses these environment variables.
 - Deploy Spring Boot behind HTTPS.
 - Change `allowed-origins` from `http://localhost:4200` to your production domain.
 - Add rate limiting / CAPTCHA to the contact endpoint before public deployment.
+
+## Render and Neon deployment
+
+This repository includes `render.yaml` for deploying the Angular frontend and Spring Boot backend on Render. The frontend is a Render Static Site and the backend is a Render Web Service. GitHub Pages is not required for this setup.
+
+The backend is configured for a PostgreSQL-compatible Neon database. In Render, set these backend environment variables from the Neon connection details:
+
+```text
+DB_URL=jdbc:postgresql://HOST/DATABASE?sslmode=require
+DB_USERNAME=NEON_USERNAME
+DB_PASSWORD=NEON_PASSWORD
+DB_DRIVER=org.postgresql.Driver
+ALLOWED_ORIGINS=https://YOUR-FRONTEND.onrender.com
+```
+
+Set `API_URL` on the frontend service to the deployed backend URL, for example `https://subash-portfolio-api.onrender.com`. The Render build generates the frontend runtime configuration from that value. Do not leave it empty in production, because the local fallback is `http://localhost:8080`.
+
+Do not commit the Neon password or any other secret. Neon free-tier availability, storage, compute limits, and Render free-tier behavior can change over time; check the providers' current pricing pages before relying on them for permanent hosting.

@@ -5,6 +5,7 @@
   "scripts": {
     "start": "ng serve",
     "build": "ng build",
+    "render:build": "node scripts/set-runtime-config.mjs && ng build --configuration production",
     "test": "ng test"
   },
   "dependencies": {

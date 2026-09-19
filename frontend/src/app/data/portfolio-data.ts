@@ -16,7 +16,7 @@ export const certificates: Certificate[] = [
     date: 'June 2026',
     area: 'Cloud / Azure',
     featured: true,
-    driveUrl: 'PASTE_GOOGLE_DRIVE_VIEW_LINK_HERE'
+    driveUrl: '/assets/azure-documents-microsoft.pdf'
   },
   {
     title: 'Digital Skills Readiness Program: Java Full Stack',
@@ -25,7 +25,7 @@ export const certificates: Certificate[] = [
     date: '06 Oct 2023',
     area: 'Java Full Stack',
     featured: true,
-    driveUrl: 'PASTE_GOOGLE_DRIVE_VIEW_LINK_HERE'
+    driveUrl: '/assets/Wipro%20TalentNext%20Java%20Full%20Stack.pdf'
   },
   {
     title: 'Test Automation',
@@ -34,7 +34,7 @@ export const certificates: Certificate[] = [
     date: '19 Jun 2023',
     area: 'Testing / Automation',
     featured: true,
-    driveUrl: 'PASTE_GOOGLE_DRIVE_VIEW_LINK_HERE'
+    driveUrl: '/assets/epam-coe%20test%20automation.jpg'
   },
   {
     title: 'AWS Academy Graduate - AWS Academy Cloud Foundations',
@@ -43,16 +43,16 @@ export const certificates: Certificate[] = [
     date: '20 Feb 2024',
     area: 'Cloud',
     featured: true,
-    driveUrl: 'PASTE_GOOGLE_DRIVE_VIEW_LINK_HERE'
+    driveUrl: '/assets/AWS_Academy_Graduate___AWS_Academy_Cloud_Foundations_Badge20240302-29-4bq3qa.pdf'
   },
   {
     title: 'Fundamentals of Artificial Intelligence',
     issuer: 'NPTEL / IIT Guwahati',
     type: 'NPTEL certification',
-    date: 'Jul-Oct 2023 • 76% • Top 5%',
+    date: 'Jul-Oct 2023 • 76%',
     area: 'AI',
     featured: true,
-    driveUrl: 'PASTE_GOOGLE_DRIVE_VIEW_LINK_HERE'
+    driveUrl: '/assets/SUBASH-GOUD-EDIGA-Participant-Certificate%20(1).pdf'
   },
   {
     title: 'Developer Job Simulation',
@@ -61,7 +61,7 @@ export const certificates: Certificate[] = [
     date: '20 Dec 2023',
     area: 'Software Development',
     featured: true,
-    driveUrl: 'PASTE_GOOGLE_DRIVE_VIEW_LINK_HERE'
+    driveUrl: '/assets/Accenture%20Nordics_developer_completion_certificate.pdf'
   },
   {
     title: 'AWS Academy Graduate - Machine Learning Foundations',
@@ -70,7 +70,7 @@ export const certificates: Certificate[] = [
     date: '01 Feb 2024',
     area: 'Machine Learning',
     featured: true,
-    driveUrl: 'PASTE_GOOGLE_DRIVE_VIEW_LINK_HERE'
+    driveUrl: '/assets/AWS_Academy_Graduate___AWS_Academy_Machine_Learning_Foundations_Badge20240302-29-kg70az.pdf'
   },
   {
     title: 'Full Stack Web Development in MERN',
@@ -79,7 +79,7 @@ export const certificates: Certificate[] = [
     date: '16 Aug - 16 Oct 2023',
     area: 'Full Stack',
     featured: true,
-    driveUrl: 'PASTE_GOOGLE_DRIVE_VIEW_LINK_HERE'
+    driveUrl: '/assets/wsa_internship_certificate_Subash%20GoudEdiga.pdf'
   },
   {
     title: 'Web Development Internship',
@@ -88,7 +88,7 @@ export const certificates: Certificate[] = [
     date: '06 Apr - 06 Jun 2023',
     area: 'Web Development',
     featured: false,
-    driveUrl: 'PASTE_GOOGLE_DRIVE_VIEW_LINK_HERE'
+    driveUrl: '/assets/PHN%20Technology%20web%20development%20internship.pdf'
   },
   {
     title: 'AI and Data Science Internship',
@@ -97,7 +97,7 @@ export const certificates: Certificate[] = [
     date: '23 Mar 2024',
     area: 'AI / Data',
     featured: false,
-    driveUrl: 'PASTE_GOOGLE_DRIVE_VIEW_LINK_HERE'
+    driveUrl: '/assets/YBI%20Foundation%27s%20ALML%20Internship.pdf'
   },
   {
     title: 'Node JS Certification Course - Master the Fundamentals',
@@ -106,7 +106,7 @@ export const certificates: Certificate[] = [
     date: '29 Feb 2024',
     area: 'Node.js',
     featured: false,
-    driveUrl: 'PASTE_GOOGLE_DRIVE_VIEW_LINK_HERE'
+    driveUrl: '/assets/Scaler%20Nodejs%20course%20.png'
   },
   {
     title: 'Python 3.4.3 Training',
@@ -115,7 +115,7 @@ export const certificates: Certificate[] = [
     date: '19 Nov 2022',
     area: 'Python',
     featured: false,
-    driveUrl: 'PASTE_GOOGLE_DRIVE_VIEW_LINK_HERE'
+    driveUrl: '/assets/mta-introduction-to-programming-using-python-certified-2022.png'
   }
 ];
 
