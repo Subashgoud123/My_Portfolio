@@ -17,8 +17,9 @@ services:
       - key: ALLOWED_ORIGINS
         value: https://subash-portfolio.onrender.com
 
-  - type: static
+  - type: web
     name: subash-portfolio
+    runtime: static
     rootDir: frontend
     buildCommand: npm ci && npm run render:build
     staticPublishPath: dist/subash-portfolio/browser
