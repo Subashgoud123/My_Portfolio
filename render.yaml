@@ -25,4 +25,4 @@ services:
     staticPublishPath: dist/subash-portfolio/browser
     envVars:
       - key: API_URL
-        sync: false
+        value: https://subash-portfolio-api.onrender.com

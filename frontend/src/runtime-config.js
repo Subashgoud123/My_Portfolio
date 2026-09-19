@@ -1,1 +1,1 @@
-globalThis.__API_URL__ = "http://localhost:8080";
+globalThis.__API_URL__ = "https://subash-portfolio-api.onrender.com";
