@@ -10,6 +10,24 @@ export interface Certificate {
 
 export const certificates: Certificate[] = [
   {
+    title: 'GATE 2026 - Graduate Aptitude Test in Engineering',
+    issuer: 'NIT Agartala',
+    type: 'GATE score card',
+    date: '2026',
+    area: 'DA and CS',
+    featured: true,
+    driveUrl: '/assets/GATE%20DA%20CS26S71206794_ScoreCard.pdf'
+  },
+  {
+    title: 'GATE 2024 - Graduate Aptitude Test in Engineering',
+    issuer: 'IISc Bangalore',
+    type: 'GATE score card',
+    date: '2024',
+    area: 'EC',
+    featured: true,
+    driveUrl: '/assets/GATE%20EC24S71206794_ScoreCard.pdf'
+  },
+  {
     title: 'Microsoft Certified: Azure Fundamentals (AZ-900)',
     issuer: 'Microsoft',
     type: 'Certification',
