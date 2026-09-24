@@ -16,7 +16,7 @@ export const certificates: Certificate[] = [
     date: '2026',
     area: 'DA and CS',
     featured: true,
-    driveUrl: '/assets/GATE%20DA%20CS26S71206794_ScoreCard.pdf'
+    driveUrl: '/assets/DA and CS GATE Score card.pdf'
   },
   {
     title: 'GATE 2024 - Graduate Aptitude Test in Engineering',
