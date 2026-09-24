@@ -13,6 +13,17 @@ spring:
   h2:
     console:
       enabled: true
+  mail:
+    host: ${MAIL_HOST:smtp.gmail.com}
+    port: ${MAIL_PORT:587}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 
 server:
   port: 8080
@@ -25,3 +36,4 @@ management:
 
 app:
   allowed-origins: ${ALLOWED_ORIGINS:http://localhost:4200}
+  contact-recipient: ${CONTACT_RECIPIENT:subashgoud12345@gmail.com}

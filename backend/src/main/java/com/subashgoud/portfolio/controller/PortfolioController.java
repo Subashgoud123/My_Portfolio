@@ -2,6 +2,7 @@ package com.subashgoud.portfolio.controller;
 
 import com.subashgoud.portfolio.model.ContactMessage;
 import com.subashgoud.portfolio.repository.ContactMessageRepository;
+import com.subashgoud.portfolio.service.ContactEmailService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,9 +16,12 @@ import java.util.Map;
 public class PortfolioController {
 
     private final ContactMessageRepository contactRepository;
+        private final ContactEmailService contactEmailService;
 
-    public PortfolioController(ContactMessageRepository contactRepository) {
+        public PortfolioController(ContactMessageRepository contactRepository,
+                                                           ContactEmailService contactEmailService) {
         this.contactRepository = contactRepository;
+                this.contactEmailService = contactEmailService;
     }
 
     @GetMapping("/profile")
@@ -171,6 +175,7 @@ public class PortfolioController {
     @PostMapping("/contact")
     public ResponseEntity<Map<String, Object>> contact(@Valid @RequestBody ContactMessage message) {
         ContactMessage saved = contactRepository.save(message);
+                contactEmailService.sendNotification(saved);
         return ResponseEntity.ok(Map.of(
                 "success", true,
                 "message", "Thanks. Your message has been received.",
