@@ -222,7 +222,7 @@ footer p { margin: 0; }
   .hero-visual { min-height: 430px; }
   .about-grid, .contact-grid { grid-template-columns: 1fr; }
   .skill-grid { grid-template-columns: repeat(2, 1fr); }
-  .cert-carousel { grid-template-columns: 40px 1fr 1fr 40px; }
+  .cert-carousel { grid-template-columns: 40px repeat(2, minmax(0, 1fr)) 40px; }
   .cert-carousel .cert-card:nth-of-type(3) { display: none; }
 }
 @media (max-width: 720px) {
@@ -246,9 +246,47 @@ footer p { margin: 0; }
   .project-grid, .education-grid { grid-template-columns: 1fr; }
   .stat-grid { grid-template-columns: repeat(2, 1fr); }
   .skill-grid { grid-template-columns: 1fr; }
-  .cert-carousel { grid-template-columns: 35px 1fr 35px; }
-  .cert-card:nth-of-type(3), .cert-card:nth-of-type(4) { display: none; }
+  .cert-carousel { grid-template-columns: 35px minmax(0, 1fr) 35px; }
+  .cert-carousel .cert-card:not(:first-of-type) { display: none; }
   .credential-intro { flex-direction: column; align-items: flex-start; }
   .form-row { grid-template-columns: 1fr; }
   footer { flex-direction: column; align-items: flex-start; }
+}
+
+@media (max-width: 720px) {
+  .section { padding-block: 76px; }
+  .section-heading { margin-bottom: 38px; }
+  .section-heading h2 { font-size: 34px; line-height: 1.08; }
+  .hero h1 { font-size: 40px; line-height: 1.03; }
+  .hero-sub { font-size: 16px; }
+  .about-text p.large { font-size: 20px; }
+  .about-panel { padding: 20px; }
+  .timeline { margin-left: 0; }
+  .timeline-item { padding: 0 0 42px 25px; }
+  .timeline-content { padding: 20px; }
+  .timeline-content:hover { transform: none; }
+  .role-line h3 { font-size: 22px; }
+  .project-card { min-height: 0; padding: 22px; }
+  .project-card h3 { font-size: 23px; }
+  .education-card { padding: 22px; }
+  .education-card h3 { margin-top: 24px; }
+  .contact-form { padding: 20px; }
+  .contact-copy h2 { font-size: 46px; }
+  footer { padding-block: 24px; }
+}
+
+@media (max-width: 400px) {
+  .brand { gap: 7px; font-size: 11px; }
+  .brand-mark { width: 30px; height: 30px; }
+  .menu { padding: 7px 9px; }
+  .hero h1 { font-size: 36px; }
+  .hero-actions { flex-direction: column; align-items: stretch; }
+  .hero-actions button { width: 100%; }
+  .hero-visual { min-height: 320px; }
+  .floating-card { transform: scale(.72); }
+  .card-java { left: -28px; }
+  .card-cloud { right: -28px; }
+  .section-heading { gap: 12px; }
+  .section-heading h2 { font-size: 30px; }
+  .contact-copy h2 { font-size: 40px; }
 }

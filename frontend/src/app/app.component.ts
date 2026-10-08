@@ -32,6 +32,7 @@ export class AppComponent implements OnInit {
 
   activeFilter = 'All';
   certIndex = 0;
+  certsPerPage = 3;
   menuOpen = false;
   scrolled = false;
   contactStatus = '';
@@ -45,6 +46,7 @@ export class AppComponent implements OnInit {
   };
 
   ngOnInit(): void {
+    this.updateCertsPerPage();
     this.service.profile().subscribe(data => this.profile = data);
     this.service.experience().subscribe(data => this.experience = data);
     this.service.education().subscribe(data => this.education = data);
@@ -96,8 +98,19 @@ export class AppComponent implements OnInit {
   }
 
   nextCert(): void {
-    const max = Math.max(0, this.featuredCertificates().length - 1);
-    this.certIndex = Math.min(this.certIndex + 1, max);
+    this.certIndex = Math.min(this.certIndex + 1, this.maxCertIndex());
+  }
+
+  maxCertIndex(): number {
+    return Math.max(0, this.featuredCertificates().length - this.certsPerPage);
+  }
+
+  @HostListener('window:resize')
+  private updateCertsPerPage(): void {
+    this.certsPerPage = window.matchMedia('(max-width: 720px)').matches
+      ? 1
+      : window.matchMedia('(max-width: 1000px)').matches ? 2 : 3;
+    this.certIndex = Math.min(this.certIndex, this.maxCertIndex());
   }
 
   prevCert(): void {

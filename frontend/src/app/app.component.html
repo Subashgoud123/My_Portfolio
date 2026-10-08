@@ -215,7 +215,7 @@
         <button (click)="openDrive(cert.driveUrl)">View credential ↗</button>
       </article>
 
-      <button class="carousel-btn right" (click)="nextCert()" [disabled]="certIndex >= featuredCertificates().length - 3">→</button>
+      <button class="carousel-btn right" (click)="nextCert()" [disabled]="certIndex >= maxCertIndex()">→</button>
     </div>
 
     <!-- <div class="cert-note reveal">
