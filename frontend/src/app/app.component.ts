@@ -2,7 +2,7 @@ import { Component, HostListener, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PortfolioService, ContactPayload } from './services/portfolio.service';
-import { certificates, projects, skillGroups, Certificate } from './data/portfolio-data';
+import { certificates, experienceData, projects, skillGroups, Certificate } from './data/portfolio-data';
 
 @Component({
   selector: 'app-root',
@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
     linkedin: 'https://www.linkedin.com/in/subash-goud/'
   };
 
-  experience: any[] = [];
+  experience: any[] = experienceData;
   education: any[] = [];
   projects = projects;
   certifications: Certificate[] = certificates;

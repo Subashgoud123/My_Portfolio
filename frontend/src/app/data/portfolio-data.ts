@@ -183,3 +183,21 @@ export const skillGroups = {
   'AI / Computer Vision': ['OpenCV', 'MediaPipe', 'Machine Learning'],
   Frontend: ['Angular', 'HTML', 'CSS', 'JavaScript']
 };
+
+export const experienceData = [
+  {
+    company: 'Accenture',
+    role: 'Packaged App Development Associate',
+    period: '29 Sep 2024 - Current',
+    location: 'Hyderabad, India',
+    highlights: [
+      'Migrated a legacy monolithic PrimeFaces application to a decoupled, API-first architecture.',
+      "Developed an application with Java's Jersey Framework.",
+      'Worked with Azure Virtual Machines, Functions and Key Vault services.',
+      'Used Jira, Git, Argo CD and GitHub Actions with CI/CD workflows.',
+      'Monitored applications using Grafana.',
+      'Worked with GitHub Copilot in the IDE.',
+      'Collaborated with business stakeholders to deliver features and troubleshoot production issues.'
+    ]
+  }
+];
