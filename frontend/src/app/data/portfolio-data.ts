@@ -145,7 +145,7 @@ export const projects = [
     stack: ['HTML', 'CSS', 'JavaScript'],
     icon: '⌁',
     featured: true,
-    url: 'https://github.com/Subashgoud123'
+    url: 'https://github.com/Subashgoud123/TEDxGPREC'
   },
   {
     title: 'Liver Disease Prediction System',
@@ -154,25 +154,70 @@ export const projects = [
     stack: ['Python', 'Machine Learning'],
     icon: '◉',
     featured: true,
-    url: 'https://github.com/Subashgoud123'
+    url: 'https://github.com/Subashgoud123/Liver-Disease-Prediction-System-Using-ML'
   },
   {
-    title: 'Agriculture Rover Vehicle',
-    category: 'Embedded / Robotics',
-    description: 'Agriculture rover vehicle project completed at IIITDM Kurnool.',
-    stack: ['Embedded Systems', 'Robotics'],
+    title: 'Open CV Python Projects',
+    category: 'Computer Vision / Robotics',
+    description: 'Collection of Python projects using OpenCV for computer vision applications.',
+    stack: ['Python', 'OpenCV', 'Computer Vision'],
     icon: '⌬',
     featured: true,
-    url: 'https://github.com/Subashgoud123'
+    url: 'https://github.com/Subashgoud123/Opencv-python'
   },
   {
-    title: 'Computer Vision Mini Projects',
-    category: 'Python / Automation',
-    description: 'Personal mini projects using OpenCV, MediaPipe and PyAutoGUI.',
-    stack: ['Python', 'OpenCV', 'MediaPipe', 'PyAutoGUI'],
+    title: 'Java Mini Projects',
+    category: 'Java / Backend',
+    description: 'Personal mini projects using Java and Spring Boot.',
+    stack: ['Java', 'Spring Boot'],
     icon: '◌',
     featured: false,
-    url: 'https://github.com/Subashgoud123'
+    url: 'https://github.com/Subashgoud123/Java-Projects/'
+  },
+  {
+    title: 'Smart Parking Management System',
+    category: 'Full Stack Development',
+    description: 'A parking management app for booking spaces, running gate operations, and tracking utilization.',
+    stack: ['Java 21', 'Quarkus', 'Angular', 'PostgreSQL', 'Docker'],
+    icon: '⌖',
+    featured: false,
+    url: 'https://github.com/Subashgoud123/smart-parking'
+  },
+  {
+    title: '30 Days of MediaPipe Gestures',
+    category: 'Computer Vision / Automation',
+    description: 'Gesture-driven tools for air drawing, media control, presentations, and a virtual calculator.',
+    stack: ['Python', 'MediaPipe', 'OpenCV'],
+    icon: '✳',
+    featured: false,
+    url: 'https://github.com/Subashgoud123/30days_mediapipe'
+  },
+  {
+    title: 'OpenCV Volume Control',
+    category: 'Computer Vision / Automation',
+    description: 'A Python computer-vision project that adjusts system volume using hand gestures.',
+    stack: ['Python', 'OpenCV'],
+    icon: '◉',
+    featured: false,
+    url: 'https://github.com/Subashgoud123/OpenCV-Volume-Control'
+  },
+  {
+    title: 'Tic-Tac-Toe',
+    category: 'Web Development',
+    description: 'A two-player browser game built with HTML, CSS, and JavaScript.',
+    stack: ['HTML', 'CSS', 'JavaScript'],
+    icon: '⊞',
+    featured: false,
+    url: 'https://github.com/Subashgoud123/tic-tac-toe'
+  },
+  {
+    title: 'Rock Paper Scissors',
+    category: 'Web Development',
+    description: 'A browser-based Rock Paper Scissors game built with HTML, CSS, and JavaScript.',
+    stack: ['HTML', 'CSS', 'JavaScript'],
+    icon: '✂',
+    featured: false,
+    url: 'https://github.com/Subashgoud123/Rock-Paper-Scissors'
   }
 ];
 

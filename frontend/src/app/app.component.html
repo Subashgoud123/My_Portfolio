@@ -1,3 +1,15 @@
+<div class="cursor-star-layer" aria-hidden="true">
+  <span
+    *ngFor="let star of cursorStars"
+    class="cursor-star"
+    [style.left.px]="star.x"
+    [style.top.px]="star.y"
+    [style.fontSize.px]="star.size"
+    [style.--star-drift]="star.drift + 'px'"
+    [style.animation-duration.ms]="star.duration"
+    (animationend)="removeCursorStar(star.id)">✦</span>
+</div>
+
 <header class="nav" [class.scrolled]="scrolled">
   <button class="brand" (click)="scrollTo('home')">
     <span class="brand-mark">SG</span>
@@ -23,7 +35,7 @@
 
     <div class="hero-copy reveal">
       <div class="eyebrow"><span class="pulse"></span> AVAILABLE FOR SOFTWARE OPPORTUNITIES</div>
-      <h1>Building <span>backend systems</span> that are ready for the real world.</h1>
+      <h1>Building <span>full stack systems</span> that are ready for the real world.</h1>
       <p class="hero-sub">
         I'm <strong>Subash Goud Ediga</strong>, a Java Backend Developer focused on REST APIs,
         cloud, containerization, delivery workflows, and frontend development with Angular.
@@ -45,7 +57,7 @@
       <div class="code-window">
         <div class="window-top">
           <div><i></i><i></i><i></i></div>
-          <span>portfolio.java</span>
+          <span>webapp.com</span>
           <b>●</b>
         </div>
         <pre><code><span class="purple">@RestController</span>
@@ -63,6 +75,7 @@
       </div>
 
       <div class="floating-card card-java"><span>☕</span><b>JAVA</b><small>Backend</small></div>
+      <div class="floating-card card-angular"><span>A</span><b>ANGULAR</b><small>Frontend</small></div>
       <div class="floating-card card-cloud"><span>☁</span><b>AZURE</b><small>Cloud</small></div>
       <div class="floating-card card-devops"><span>⌘</span><b>CI/CD</b><small>Delivery</small></div>
     </div>
@@ -144,13 +157,14 @@
     </div>
 
     <div class="filter-row reveal">
-      <button *ngFor="let filter of projectFilters()" [class.active]="activeFilter === filter" (click)="activeFilter = filter">
+      <button *ngFor="let filter of projectFilters()" [class.active]="activeFilter === filter" (click)="setProjectFilter(filter)">
         {{ filter }}
       </button>
     </div>
 
     <div class="project-grid">
-      <article class="project-card reveal" *ngFor="let project of filteredProjects(); let i = index">
+      <article class="project-card reveal" *ngFor="let project of filteredProjects(); let i = index"
+        (pointermove)="tiltProject($event)" (pointerleave)="resetProjectTilt($event)">
         <div class="project-top">
           <span class="project-number">0{{ i + 1 }}</span>
           <span class="project-icon">{{ project.icon }}</span>
@@ -164,6 +178,16 @@
         <a [href]="project.url" target="_blank" rel="noopener" class="project-link">Open project <span>↗</span></a>
       </article>
     </div>
+
+    <button
+      class="projects-toggle"
+      type="button"
+      *ngIf="hasMoreProjects()"
+      [attr.aria-expanded]="projectsExpanded"
+      (click)="toggleProjects()">
+      {{ projectsExpanded ? 'Show fewer projects' : 'Load more projects' }}
+      <span aria-hidden="true">{{ projectsExpanded ? '↑' : '↓' }}</span>
+    </button>
   </section>
 
   <section id="skills" class="section skills-section">
@@ -204,7 +228,7 @@
       <span class="credential-count">{{ certifications.length }} records in master profile</span>
     </div>
 
-    <div class="cert-carousel reveal">
+    <div class="cert-carousel reveal" (touchstart)="onCertTouchStart($event)" (touchend)="onCertTouchEnd($event)">
       <button class="carousel-btn left" (click)="prevCert()" [disabled]="certIndex === 0">←</button>
 
       <article class="cert-card" *ngFor="let cert of visibleCerts()">

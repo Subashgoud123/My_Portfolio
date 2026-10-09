@@ -85,28 +85,81 @@ public class PortfolioController {
                         "category", "Web Development",
                         "description", "Official website project built using HTML, CSS and JavaScript.",
                         "stack", List.of("HTML", "CSS", "JavaScript"),
-                        "featured", true
+                        "featured", true,
+                        "icon", "⌁",
+                        "url", "https://github.com/Subashgoud123/TEDxGPREC"
                 ),
                 Map.of(
                         "title", "Liver Disease Prediction System",
                         "category", "Machine Learning",
                         "description", "Machine-learning project for liver disease prediction using Python.",
                         "stack", List.of("Python", "Machine Learning"),
-                        "featured", true
+                        "featured", true,
+                        "icon", "◉",
+                        "url", "https://github.com/Subashgoud123/Liver-Disease-Prediction-System-Using-ML"
                 ),
                 Map.of(
-                        "title", "Agriculture Rover Vehicle",
-                        "category", "Embedded / Robotics",
-                        "description", "Agriculture rover vehicle project completed at IIITDM Kurnool.",
-                        "stack", List.of("Embedded Systems", "Robotics"),
-                        "featured", true
+                        "title", "Open CV Python Projects",
+                        "category", "Computer Vision / Robotics",
+                        "description", "Collection of Python projects using OpenCV for computer vision applications.",
+                        "stack", List.of("Python", "OpenCV", "Computer Vision"),
+                        "featured", true,
+                        "icon", "⌬",
+                        "url", "https://github.com/Subashgoud123/Opencv-python"
                 ),
                 Map.of(
-                        "title", "Computer Vision Mini Projects",
-                        "category", "Python / Automation",
-                        "description", "Personal mini projects using OpenCV, MediaPipe and PyAutoGUI.",
-                        "stack", List.of("Python", "OpenCV", "MediaPipe", "PyAutoGUI"),
-                        "featured", false
+                        "title", "Java Mini Projects",
+                        "category", "Java / Backend",
+                        "description", "Personal mini projects using Java and Spring Boot.",
+                        "stack", List.of("Java", "Spring Boot"),
+                        "featured", false,
+                        "icon", "◌",
+                        "url", "https://github.com/Subashgoud123/Java-Projects/"
+                ),
+                Map.of(
+                        "title", "Smart Parking Management System",
+                        "category", "Full Stack Development",
+                        "description", "A parking management app for booking spaces, running gate operations, and tracking utilization.",
+                        "stack", List.of("Java 21", "Quarkus", "Angular", "PostgreSQL", "Docker"),
+                        "featured", false,
+                        "icon", "⌖",
+                        "url", "https://github.com/Subashgoud123/smart-parking"
+                ),
+                Map.of(
+                        "title", "30 Days of MediaPipe Gestures",
+                        "category", "Computer Vision / Automation",
+                        "description", "Gesture-driven tools for air drawing, media control, presentations, and a virtual calculator.",
+                        "stack", List.of("Python", "MediaPipe", "OpenCV"),
+                        "featured", false,
+                        "icon", "✳",
+                        "url", "https://github.com/Subashgoud123/30days_mediapipe"
+                ),
+                Map.of(
+                        "title", "OpenCV Volume Control",
+                        "category", "Computer Vision / Automation",
+                        "description", "A Python computer-vision project that adjusts system volume using hand gestures.",
+                        "stack", List.of("Python", "OpenCV"),
+                        "featured", false,
+                        "icon", "◉",
+                        "url", "https://github.com/Subashgoud123/OpenCV-Volume-Control"
+                ),
+                Map.of(
+                        "title", "Tic-Tac-Toe",
+                        "category", "Web Development",
+                        "description", "A two-player browser game built with HTML, CSS, and JavaScript.",
+                        "stack", List.of("HTML", "CSS", "JavaScript"),
+                        "featured", false,
+                        "icon", "⊞",
+                        "url", "https://github.com/Subashgoud123/tic-tac-toe"
+                ),
+                Map.of(
+                        "title", "Rock Paper Scissors",
+                        "category", "Web Development",
+                        "description", "A browser-based Rock Paper Scissors game built with HTML, CSS, and JavaScript.",
+                        "stack", List.of("HTML", "CSS", "JavaScript"),
+                        "featured", false,
+                        "icon", "✂",
+                        "url", "https://github.com/Subashgoud123/Rock-Paper-Scissors"
                 )
         );
     }

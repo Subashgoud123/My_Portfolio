@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit, inject } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PortfolioService, ContactPayload } from './services/portfolio.service';
@@ -11,8 +11,12 @@ import { certificates, experienceData, projects, skillGroups, Certificate } from
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   private service = inject(PortfolioService);
+  private host = inject(ElementRef<HTMLElement>);
+  private certTouchStart: { x: number; y: number } | null = null;
+  private lastStarPoint: { x: number; y: number } | null = null;
+  private nextStarId = 0;
 
   profile: any = {
     name: 'Subash Goud Ediga',
@@ -29,8 +33,11 @@ export class AppComponent implements OnInit {
   projects = projects;
   certifications: Certificate[] = certificates;
   skills = skillGroups;
+  cursorStars: { id: number; x: number; y: number; drift: number; duration: number; size: number }[] = [];
 
   activeFilter = 'All';
+  projectsExpanded = false;
+  private readonly initialProjectCount = 4;
   certIndex = 0;
   certsPerPage = 3;
   menuOpen = false;
@@ -53,10 +60,51 @@ export class AppComponent implements OnInit {
     this.service.projects().subscribe(data => this.projects = data);
   }
 
+  ngAfterViewInit(): void {
+    requestAnimationFrame(() => this.revealSections());
+  }
+
   @HostListener('window:scroll')
   onScroll(): void {
     this.scrolled = window.scrollY > 40;
+    const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = scrollableHeight > 0 ? window.scrollY / scrollableHeight : 0;
+    this.host.nativeElement.style.setProperty('--scroll-progress', `${progress}`);
     this.revealSections();
+  }
+
+  @HostListener('window:pointermove', ['$event'])
+  onPointerMove(event: PointerEvent): void {
+    if (event.pointerType !== 'mouse') return;
+    this.host.nativeElement.style.setProperty('--pointer-x', `${event.clientX}px`);
+    this.host.nativeElement.style.setProperty('--pointer-y', `${event.clientY}px`);
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!this.lastStarPoint) {
+      this.lastStarPoint = { x: event.clientX, y: event.clientY };
+      return;
+    }
+
+    const dx = event.clientX - this.lastStarPoint.x;
+    const dy = event.clientY - this.lastStarPoint.y;
+    if (Math.hypot(dx, dy) < 22) return;
+
+    this.lastStarPoint = { x: event.clientX, y: event.clientY };
+    this.cursorStars = [
+      ...this.cursorStars,
+      {
+        id: this.nextStarId++,
+        x: event.clientX,
+        y: event.clientY,
+        drift: (Math.random() - 0.5) * 54,
+        duration: 650 + Math.random() * 350,
+        size: 8 + Math.random() * 7
+      }
+    ].slice(-18);
+  }
+
+  removeCursorStar(id: number): void {
+    this.cursorStars = this.cursorStars.filter(star => star.id !== id);
   }
 
   private revealSections(): void {
@@ -87,10 +135,47 @@ export class AppComponent implements OnInit {
     return ['All', ...Array.from(new Set(this.projects.map(p => p.category)))];
   }
 
+  setProjectFilter(filter: string): void {
+    this.activeFilter = filter;
+    this.projectsExpanded = false;
+  }
+
+  toggleProjects(): void {
+    this.projectsExpanded = !this.projectsExpanded;
+    requestAnimationFrame(() => this.revealSections());
+  }
+
+  hasMoreProjects(): boolean {
+    return this.matchingProjects().length > this.initialProjectCount;
+  }
+
   filteredProjects() {
+    const matchingProjects = this.matchingProjects();
+    return this.projectsExpanded
+      ? matchingProjects
+      : matchingProjects.slice(0, this.initialProjectCount);
+  }
+
+  private matchingProjects() {
     return this.activeFilter === 'All'
       ? this.projects
       : this.projects.filter(p => p.category === this.activeFilter);
+  }
+
+  tiltProject(event: PointerEvent): void {
+    if (event.pointerType !== 'mouse') return;
+    const card = event.currentTarget as HTMLElement;
+    const bounds = card.getBoundingClientRect();
+    const horizontal = (event.clientX - bounds.left) / bounds.width - 0.5;
+    const vertical = (event.clientY - bounds.top) / bounds.height - 0.5;
+    card.style.setProperty('--tilt-x', `${-vertical * 5}deg`);
+    card.style.setProperty('--tilt-y', `${horizontal * 5}deg`);
+  }
+
+  resetProjectTilt(event: PointerEvent): void {
+    const card = event.currentTarget as HTMLElement;
+    card.style.removeProperty('--tilt-x');
+    card.style.removeProperty('--tilt-y');
   }
 
   featuredCertificates(): Certificate[] {
@@ -115,6 +200,23 @@ export class AppComponent implements OnInit {
 
   prevCert(): void {
     this.certIndex = Math.max(this.certIndex - 1, 0);
+  }
+
+  onCertTouchStart(event: TouchEvent): void {
+    const touch = event.changedTouches[0];
+    this.certTouchStart = { x: touch.clientX, y: touch.clientY };
+  }
+
+  onCertTouchEnd(event: TouchEvent): void {
+    if (!this.certTouchStart) return;
+    const touch = event.changedTouches[0];
+    const horizontalDelta = touch.clientX - this.certTouchStart.x;
+    const verticalDelta = touch.clientY - this.certTouchStart.y;
+    this.certTouchStart = null;
+
+    if (Math.abs(horizontalDelta) < 45 || Math.abs(horizontalDelta) < Math.abs(verticalDelta)) return;
+    if (horizontalDelta < 0) this.nextCert();
+    else this.prevCert();
   }
 
   visibleCerts(): Certificate[] {
