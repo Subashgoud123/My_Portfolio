@@ -238,19 +238,17 @@ export class AppComponent implements OnInit, AfterViewInit {
 
     this.service.sendMessage(this.contact).subscribe({
       next: res => {
-        this.contactStatus = res.message || 'Message sent successfully.';
+        this.contactStatus = res.message || 'Your message was accepted for delivery.';
         this.contact = { name: '', email: '', subject: '', message: '' };
         this.contactSending = false;
       },
       error: (error: HttpErrorResponse) => {
         if (error.status === 0) {
-          this.contactStatus = 'Could not connect to the portfolio API. Check that the Render backend is live and the frontend API_URL points to its HTTPS URL.';
-        } else if (error.status === 503) {
-          this.contactStatus = 'Could not send your message because email delivery is not configured. Add the Resend API key to the backend service on Render.';
-        } else if (error.status === 502) {
-          this.contactStatus = 'Could not send your message because Resend rejected it. Check the API key and sender verification in Render.';
+          this.contactStatus = 'Could not connect to the email service. Please try again later.';
+        } else if (!error.status) {
+          this.contactStatus = error.message || 'The email service did not accept the message.';
         } else {
-          this.contactStatus = `Could not send your message (server returned HTTP ${error.status}). Please check the backend logs and email configuration.`;
+          this.contactStatus = `Could not send your message (email service returned HTTP ${error.status}). Please try again later.`;
         }
         this.contactSending = false;
       }

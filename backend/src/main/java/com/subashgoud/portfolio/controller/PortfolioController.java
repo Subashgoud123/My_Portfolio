@@ -1,24 +1,13 @@
 package com.subashgoud.portfolio.controller;
 
-import com.subashgoud.portfolio.model.ContactMessage;
-import com.subashgoud.portfolio.service.ContactEmailService;
-import jakarta.validation.Valid;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
 public class PortfolioController {
-
-    private final ContactEmailService contactEmailService;
-
-    public PortfolioController(ContactEmailService contactEmailService) {
-        this.contactEmailService = contactEmailService;
-    }
 
     @GetMapping("/profile")
     public Map<String, Object> profile() {
@@ -221,13 +210,4 @@ public class PortfolioController {
         );
     }
 
-    @PostMapping("/contact")
-    public ResponseEntity<Map<String, Object>> contact(@Valid @RequestBody ContactMessage message) {
-        contactEmailService.sendNotification(message);
-        return ResponseEntity.ok(Map.of(
-                "success", true,
-                "message", "Thanks. Your message has been sent.",
-                "receivedAt", LocalDateTime.now().toString()
-        ));
-    }
 }

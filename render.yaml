@@ -5,15 +5,6 @@ services:
     rootDir: backend
     dockerfilePath: ./Dockerfile
     healthCheckPath: /actuator/health
-    envVars:
-      - key: RESEND_API_KEY
-        sync: false
-      - key: RESEND_FROM
-        value: Portfolio Contact <onboarding@resend.dev>
-      - key: CONTACT_RECIPIENT
-        value: subashgoud12345@gmail.com
-      - key: ALLOWED_ORIGINS
-        value: https://subash-portfolio-444w.onrender.com
 
   - type: web
     name: subash-portfolio

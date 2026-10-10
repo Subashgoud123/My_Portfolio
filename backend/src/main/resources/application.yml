@@ -14,6 +14,3 @@ management:
 
 app:
   allowed-origins: ${ALLOWED_ORIGINS:http://localhost:4200}
-  contact-recipient: ${CONTACT_RECIPIENT:subashgoud12345@gmail.com}
-  resend-api-key: ${RESEND_API_KEY:}
-  resend-from: ${RESEND_FROM:Portfolio Contact <onboarding@resend.dev>}

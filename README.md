@@ -8,7 +8,7 @@ A recruiter-focused full-stack portfolio built with:
 - Java 21 + Spring Boot
 - REST APIs
 - Spring Validation
-- Direct email delivery through the Resend API (no database required)
+- Contact form email delivery through FormSubmit (no backend mail configuration)
 - Google Drive links for certificates/resume
 - Contact form backed by Spring Boot
 
@@ -41,29 +41,15 @@ API examples:
 - GET /api/education
 - GET /api/certifications
 - GET /api/skills
-- POST /api/contact
 
 ## Contact form email
 
-The Angular contact form posts to `POST /api/contact`. Spring Boot validates the
-submission and sends it through Resend's HTTPS API to `CONTACT_RECIPIENT`
-(defaults to `subashgoud12345@gmail.com`). The visitor's email is set as the
-reply-to address. No database or SMTP connection is used.
-
-Create a Resend account and an API key. For local development, set the key
-before starting the backend:
-
-```powershell
-$env:RESEND_API_KEY = "re_your_api_key"
-$env:CONTACT_RECIPIENT = "subashgoud12345@gmail.com"
-cd backend
-mvn spring-boot:run
-```
-
-The default sender is Resend's `onboarding@resend.dev`, which can only deliver
-to the email address registered and verified with your Resend account. To send
-to other recipients, verify a domain in Resend and configure `RESEND_FROM` to
-use an address on that domain. Keep the API key secret; never commit it.
+The Angular contact form submits directly to FormSubmit's cross-origin AJAX
+endpoint for `subashgoud12345@gmail.com`. It does not need a database, email
+credentials, or a backend deployment to send messages. FormSubmit requires
+confirmation the first time: submit one real message, then open the activation
+email delivered to the recipient inbox and approve the form. Until the form is
+activated, submissions will not arrive.
 
 ## Run frontend
 
@@ -109,29 +95,16 @@ You can use the same pattern for the resume link.
 - Replace all Drive placeholders.
 - Add your real profile photo to `frontend/src/assets/profile.jpg`.
 - Replace the demo GitHub project URLs with the actual repositories.
-- Configure the Resend API key for contact-form email delivery.
+- Activate the contact form using the confirmation email from FormSubmit.
 - Put the Angular build behind Nginx or a CDN.
 - Deploy Spring Boot behind HTTPS.
 - Change `allowed-origins` from `http://localhost:4200` to your production domain.
-- Add rate limiting / CAPTCHA to the contact endpoint before public deployment.
+- Keep FormSubmit's default CAPTCHA protection enabled.
 
 ## Render deployment
 
 This repository includes `render.yaml` for deploying the Angular frontend and Spring Boot backend on Render. The frontend is a Render Static Site and the backend is a Render Web Service. GitHub Pages is not required for this setup.
 
-The contact endpoint sends the submitted message directly by email and does not require a database. Configure the backend's Resend API key and frontend origin in Render:
-
-```text
-RESEND_API_KEY=re_your_api_key
-RESEND_FROM=Portfolio Contact <onboarding@resend.dev>
-CONTACT_RECIPIENT=subashgoud12345@gmail.com
-ALLOWED_ORIGINS=https://YOUR-FRONTEND.onrender.com
-```
-
-The default Resend sender is limited to the verified email address on your
-Resend account. Verify your own sending domain and update `RESEND_FROM` if you
-need delivery to other recipients.
-
-Set `API_URL` on the frontend service to the deployed backend URL, for example `https://subash-portfolio-api.onrender.com`. The Render build generates the frontend runtime configuration from that value. Do not leave it empty in production, because the local fallback is `http://localhost:8080`.
-
-Do not commit email credentials or any other secret.
+The contact form uses FormSubmit directly and needs no mail-related Render
+environment variables. The frontend `API_URL` is still used for portfolio
+content such as profile and projects, but not for contact form submissions.
