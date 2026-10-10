@@ -8,7 +8,7 @@ A recruiter-focused full-stack portfolio built with:
 - Java 21 + Spring Boot
 - REST APIs
 - Spring Validation
-- Contact form email delivery through FormSubmit (no backend mail configuration)
+- Contact form storage in PostgreSQL and email delivery through FormSubmit
 - Google Drive links for certificates/resume
 - Contact form backed by Spring Boot
 
@@ -41,15 +41,42 @@ API examples:
 - GET /api/education
 - GET /api/certifications
 - GET /api/skills
+- POST /api/contact
 
 ## Contact form email
 
-The Angular contact form submits directly to FormSubmit's cross-origin AJAX
-endpoint for `subashgoud12345@gmail.com`. It does not need a database, email
-credentials, or a backend deployment to send messages. FormSubmit requires
+The contact form first saves the submission to the backend PostgreSQL database,
+then sends an email using FormSubmit to `subashgoud12345@gmail.com`. If the email
+service is unavailable, the submission remains stored. FormSubmit requires
 confirmation the first time: submit one real message, then open the activation
-email delivered to the recipient inbox and approve the form. Until the form is
-activated, submissions will not arrive.
+email delivered to the recipient inbox and approve the form.
+
+### Connect the backend to Neon
+
+In Neon, open your project and select **Connect**. Choose the branch and database
+for the portfolio, enable the pooled connection option, choose the Java/JDBC
+connection string, and copy its host, database, user, and password. In the
+Render Dashboard, open the `subash-portfolio-api` service, select **Environment**,
+and add these variables before deploying the database changes:
+
+```text
+SPRING_DATASOURCE_URL=jdbc:postgresql://<Neon-pooled-host>/<database>?sslmode=require
+SPRING_DATASOURCE_USERNAME=<Neon-role>
+SPRING_DATASOURCE_PASSWORD=<Neon-password>
+```
+
+Use the pooled host and database shown in Neon. Keep `?sslmode=require` on the
+JDBC URL, and put the role and password in their separate Render variables;
+never commit credentials or post them in chat. Save the variables first, then
+deploy the code. The backend creates the `contact_submissions` table
+automatically. Submissions are not exposed through a public read API; view them
+in Neon's **SQL Editor** with:
+
+```sql
+SELECT id, name, email, subject, message, submitted_at
+FROM contact_submissions
+ORDER BY submitted_at DESC;
+```
 
 ## Run frontend
 
@@ -105,6 +132,8 @@ You can use the same pattern for the resume link.
 
 This repository includes `render.yaml` for deploying the Angular frontend and Spring Boot backend on Render. The frontend is a Render Static Site and the backend is a Render Web Service. GitHub Pages is not required for this setup.
 
-The contact form uses FormSubmit directly and needs no mail-related Render
-environment variables. The frontend `API_URL` is still used for portfolio
-content such as profile and projects, but not for contact form submissions.
+The contact form stores messages in Neon and sends notification email using
+FormSubmit. Set the three `SPRING_DATASOURCE_*` variables on the backend service
+before deploying the database changes. The frontend `API_URL` is used for
+portfolio content and saving contact submissions. FormSubmit requires one-time
+activation by confirming the email it sends to `subashgoud12345@gmail.com`.

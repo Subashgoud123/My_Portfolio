@@ -236,19 +236,27 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.contactSending = true;
     this.contactStatus = '';
 
-    this.service.sendMessage(this.contact).subscribe({
-      next: res => {
-        this.contactStatus = res.message || 'Your message was accepted for delivery.';
-        this.contact = { name: '', email: '', subject: '', message: '' };
-        this.contactSending = false;
+    const submission = { ...this.contact };
+    this.service.saveMessage(submission).subscribe({
+      next: () => {
+        this.service.sendMessage(submission).subscribe({
+          next: () => {
+            this.contactStatus = 'Your message was saved and submitted for email delivery.';
+            this.contact = { name: '', email: '', subject: '', message: '' };
+            this.contactSending = false;
+          },
+          error: () => {
+            this.contactStatus = 'Could not send the email notification, but your message was saved to the database.';
+            this.contact = { name: '', email: '', subject: '', message: '' };
+            this.contactSending = false;
+          }
+        });
       },
       error: (error: HttpErrorResponse) => {
         if (error.status === 0) {
-          this.contactStatus = 'Could not connect to the email service. Please try again later.';
-        } else if (!error.status) {
-          this.contactStatus = error.message || 'The email service did not accept the message.';
+          this.contactStatus = 'Could not connect to the portfolio API. Your message was not saved or emailed.';
         } else {
-          this.contactStatus = `Could not send your message (email service returned HTTP ${error.status}). Please try again later.`;
+          this.contactStatus = `Could not save your message (server returned HTTP ${error.status}). It was not emailed.`;
         }
         this.contactSending = false;
       }

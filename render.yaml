@@ -5,6 +5,15 @@ services:
     rootDir: backend
     dockerfilePath: ./Dockerfile
     healthCheckPath: /actuator/health
+    envVars:
+      - key: SPRING_DATASOURCE_URL
+        sync: false
+      - key: SPRING_DATASOURCE_USERNAME
+        sync: false
+      - key: SPRING_DATASOURCE_PASSWORD
+        sync: false
+      - key: ALLOWED_ORIGINS
+        value: https://subash-portfolio-444w.onrender.com
 
   - type: web
     name: subash-portfolio

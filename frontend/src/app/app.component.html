@@ -287,6 +287,7 @@
         </div>
         <label>Subject<input [(ngModel)]="contact.subject" name="subject" placeholder="Backend opportunity / collaboration" required></label>
         <label>Message<textarea [(ngModel)]="contact.message" name="message" rows="5" placeholder="Tell me what you're building..." required></textarea></label>
+        <p class="form-privacy">Your message will be stored in the portfolio database and emailed to me. Please don't include sensitive personal information.</p>
         <button class="primary-btn submit-btn" type="submit" [disabled]="contactSending">
           {{ contactSending ? 'Sending...' : 'Send message ↗' }}
         </button>
