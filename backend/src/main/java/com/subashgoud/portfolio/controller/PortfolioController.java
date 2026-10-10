@@ -1,23 +1,13 @@
 package com.subashgoud.portfolio.controller;
 
-import com.subashgoud.portfolio.model.ContactMessage;
-import com.subashgoud.portfolio.service.ContactSubmissionService;
-import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
 public class PortfolioController {
-
-    private final ContactSubmissionService contactSubmissionService;
-
-    public PortfolioController(ContactSubmissionService contactSubmissionService) {
-        this.contactSubmissionService = contactSubmissionService;
-    }
 
     @GetMapping("/profile")
     public Map<String, Object> profile() {
@@ -220,14 +210,4 @@ public class PortfolioController {
         );
     }
 
-    @PostMapping("/contact")
-    public Map<String, Object> contact(@Valid @RequestBody ContactMessage message) {
-        long id = contactSubmissionService.save(message);
-        return Map.of(
-                "success", true,
-                "message", "Your message was saved.",
-                "id", id,
-                "receivedAt", LocalDateTime.now().toString()
-        );
-    }
 }

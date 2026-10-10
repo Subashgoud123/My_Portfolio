@@ -16,13 +16,6 @@ interface FormSubmitResponse {
   message?: string;
 }
 
-export interface SavedContactResponse {
-  success: boolean;
-  message: string;
-  id: number;
-  receivedAt: string;
-}
-
 @Injectable({ providedIn: 'root' })
 export class PortfolioService {
   private http = inject(HttpClient);
@@ -35,9 +28,6 @@ export class PortfolioService {
   skills(): Observable<any> { return this.http.get(`${this.api}/skills`); }
   projects(): Observable<any> { return this.http.get(`${this.api}/projects`); }
   certifications(): Observable<any> { return this.http.get(`${this.api}/certifications`); }
-  saveMessage(payload: ContactPayload): Observable<SavedContactResponse> {
-    return this.http.post<SavedContactResponse>(`${this.api}/contact`, payload);
-  }
   sendMessage(payload: ContactPayload): Observable<FormSubmitResponse> {
     return this.http.post<FormSubmitResponse>(this.contactFormUrl, {
       ...payload,
