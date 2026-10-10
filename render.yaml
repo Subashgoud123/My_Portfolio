@@ -12,8 +12,6 @@ services:
         sync: false
       - key: DB_PASSWORD
         sync: false
-      - key: DB_DRIVER
-        value: org.postgresql.Driver
       - key: MAIL_HOST
         value: smtp.gmail.com
       - key: MAIL_PORT
@@ -25,7 +23,7 @@ services:
       - key: CONTACT_RECIPIENT
         value: subashgoud12345@gmail.com
       - key: ALLOWED_ORIGINS
-        value: https://subash-portfolio.onrender.com
+        value: https://subash-portfolio-444w.onrender.com
 
   - type: web
     name: subash-portfolio
