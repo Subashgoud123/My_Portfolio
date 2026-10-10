@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, HostListener, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http';
 import { PortfolioService, ContactPayload } from './services/portfolio.service';
 import { certificates, experienceData, projects, skillGroups, Certificate } from './data/portfolio-data';
 
@@ -241,8 +242,14 @@ export class AppComponent implements OnInit, AfterViewInit {
         this.contact = { name: '', email: '', subject: '', message: '' };
         this.contactSending = false;
       },
-      error: () => {
-        this.contactStatus = 'Could not reach the backend. Make sure Spring Boot is running on port 8080.';
+      error: (error: HttpErrorResponse) => {
+        if (error.status === 0) {
+          this.contactStatus = 'Could not connect to the portfolio API. Check that the Render backend is live and the frontend API_URL points to its HTTPS URL.';
+        } else if (error.status === 503) {
+          this.contactStatus = 'Could not reach the portfolio API because the Render service is unavailable. Check the backend service health and logs.';
+        } else {
+          this.contactStatus = `Could not send your message (server returned HTTP ${error.status}). Please check the backend logs and email configuration.`;
+        }
         this.contactSending = false;
       }
     });

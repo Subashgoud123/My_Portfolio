@@ -44,6 +44,32 @@ API examples:
 - GET /api/skills
 - POST /api/contact
 
+## Contact form email
+
+The Angular contact form posts to `POST /api/contact`. Spring Boot validates and
+saves the message, then sends an email to `CONTACT_RECIPIENT` (defaults to
+`subashgoud12345@gmail.com`). The visitor's email is set as the reply-to address.
+
+For Gmail SMTP, use a Google App Password; do not use or commit your normal
+Google account password. Enable 2-Step Verification on the sending Google
+account and create an App Password in its Google Account security settings.
+Set the sender account and App Password before starting the backend. In
+PowerShell:
+
+```powershell
+$env:MAIL_USERNAME = "your-sending-gmail@gmail.com"
+$env:MAIL_PASSWORD = "your-16-character-app-password"
+$env:CONTACT_RECIPIENT = "subashgoud12345@gmail.com"
+cd backend
+mvn spring-boot:run
+```
+
+The application uses `smtp.gmail.com:587` with SMTP authentication and
+STARTTLS by default. For deployment, configure `MAIL_USERNAME`,
+`MAIL_PASSWORD`, and optionally `CONTACT_RECIPIENT` as backend environment
+variables. `render.yaml` already declares these variables. Never commit SMTP
+credentials to the repository.
+
 ## Run frontend
 
 Requirements:
@@ -108,7 +134,7 @@ The included `application.yml` uses these environment variables.
 - Replace all Drive placeholders.
 - Add your real profile photo to `frontend/src/assets/profile.jpg`.
 - Replace the demo GitHub project URLs with the actual repositories.
-- Add a real email service if you want contact-form emails instead of database storage.
+- Configure SMTP environment variables for contact-form email delivery.
 - Put the Angular build behind Nginx or a CDN.
 - Deploy Spring Boot behind HTTPS.
 - Change `allowed-origins` from `http://localhost:4200` to your production domain.
