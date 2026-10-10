@@ -246,7 +246,9 @@ export class AppComponent implements OnInit, AfterViewInit {
         if (error.status === 0) {
           this.contactStatus = 'Could not connect to the portfolio API. Check that the Render backend is live and the frontend API_URL points to its HTTPS URL.';
         } else if (error.status === 503) {
-          this.contactStatus = 'Could not reach the portfolio API because the Render service is unavailable. Check the backend service health and logs.';
+          this.contactStatus = 'Could not send your message because email delivery is not configured. Add the Resend API key to the backend service on Render.';
+        } else if (error.status === 502) {
+          this.contactStatus = 'Could not send your message because Resend rejected it. Check the API key and sender verification in Render.';
         } else {
           this.contactStatus = `Could not send your message (server returned HTTP ${error.status}). Please check the backend logs and email configuration.`;
         }

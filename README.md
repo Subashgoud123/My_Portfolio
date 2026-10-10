@@ -8,7 +8,7 @@ A recruiter-focused full-stack portfolio built with:
 - Java 21 + Spring Boot
 - REST APIs
 - Spring Validation
-- Direct SMTP email delivery for contact form submissions (no database required)
+- Direct email delivery through the Resend API (no database required)
 - Google Drive links for certificates/resume
 - Contact form backed by Spring Boot
 
@@ -45,29 +45,25 @@ API examples:
 
 ## Contact form email
 
-The Angular contact form posts to `POST /api/contact`. Spring Boot validates and
-saves the message, then sends an email to `CONTACT_RECIPIENT` (defaults to
-`subashgoud12345@gmail.com`). The visitor's email is set as the reply-to address.
+The Angular contact form posts to `POST /api/contact`. Spring Boot validates the
+submission and sends it through Resend's HTTPS API to `CONTACT_RECIPIENT`
+(defaults to `subashgoud12345@gmail.com`). The visitor's email is set as the
+reply-to address. No database or SMTP connection is used.
 
-For Gmail SMTP, use a Google App Password; do not use or commit your normal
-Google account password. Enable 2-Step Verification on the sending Google
-account and create an App Password in its Google Account security settings.
-Set the sender account and App Password before starting the backend. In
-PowerShell:
+Create a Resend account and an API key. For local development, set the key
+before starting the backend:
 
 ```powershell
-$env:MAIL_USERNAME = "your-sending-gmail@gmail.com"
-$env:MAIL_PASSWORD = "your-16-character-app-password"
+$env:RESEND_API_KEY = "re_your_api_key"
 $env:CONTACT_RECIPIENT = "subashgoud12345@gmail.com"
 cd backend
 mvn spring-boot:run
 ```
 
-The application uses `smtp.gmail.com:587` with SMTP authentication and
-STARTTLS by default. For deployment, configure `MAIL_USERNAME`,
-`MAIL_PASSWORD`, and optionally `CONTACT_RECIPIENT` as backend environment
-variables. `render.yaml` already declares these variables. Never commit SMTP
-credentials to the repository.
+The default sender is Resend's `onboarding@resend.dev`, which can only deliver
+to the email address registered and verified with your Resend account. To send
+to other recipients, verify a domain in Resend and configure `RESEND_FROM` to
+use an address on that domain. Keep the API key secret; never commit it.
 
 ## Run frontend
 
@@ -113,7 +109,7 @@ You can use the same pattern for the resume link.
 - Replace all Drive placeholders.
 - Add your real profile photo to `frontend/src/assets/profile.jpg`.
 - Replace the demo GitHub project URLs with the actual repositories.
-- Configure SMTP environment variables for contact-form email delivery.
+- Configure the Resend API key for contact-form email delivery.
 - Put the Angular build behind Nginx or a CDN.
 - Deploy Spring Boot behind HTTPS.
 - Change `allowed-origins` from `http://localhost:4200` to your production domain.
@@ -123,14 +119,18 @@ You can use the same pattern for the resume link.
 
 This repository includes `render.yaml` for deploying the Angular frontend and Spring Boot backend on Render. The frontend is a Render Static Site and the backend is a Render Web Service. GitHub Pages is not required for this setup.
 
-The contact endpoint sends the submitted message directly by email and does not require a database. Configure the backend's mail credentials and frontend origin in Render:
+The contact endpoint sends the submitted message directly by email and does not require a database. Configure the backend's Resend API key and frontend origin in Render:
 
 ```text
-MAIL_USERNAME=your-sending-gmail@gmail.com
-MAIL_PASSWORD=your-gmail-app-password
+RESEND_API_KEY=re_your_api_key
+RESEND_FROM=Portfolio Contact <onboarding@resend.dev>
 CONTACT_RECIPIENT=subashgoud12345@gmail.com
 ALLOWED_ORIGINS=https://YOUR-FRONTEND.onrender.com
 ```
+
+The default Resend sender is limited to the verified email address on your
+Resend account. Verify your own sending domain and update `RESEND_FROM` if you
+need delivery to other recipients.
 
 Set `API_URL` on the frontend service to the deployed backend URL, for example `https://subash-portfolio-api.onrender.com`. The Render build generates the frontend runtime configuration from that value. Do not leave it empty in production, because the local fallback is `http://localhost:8080`.
 

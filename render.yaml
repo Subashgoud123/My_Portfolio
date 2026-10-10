@@ -6,14 +6,10 @@ services:
     dockerfilePath: ./Dockerfile
     healthCheckPath: /actuator/health
     envVars:
-      - key: MAIL_HOST
-        value: smtp.gmail.com
-      - key: MAIL_PORT
-        value: "587"
-      - key: MAIL_USERNAME
+      - key: RESEND_API_KEY
         sync: false
-      - key: MAIL_PASSWORD
-        sync: false
+      - key: RESEND_FROM
+        value: Portfolio Contact <onboarding@resend.dev>
       - key: CONTACT_RECIPIENT
         value: subashgoud12345@gmail.com
       - key: ALLOWED_ORIGINS
