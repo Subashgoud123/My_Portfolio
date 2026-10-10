@@ -8,8 +8,7 @@ A recruiter-focused full-stack portfolio built with:
 - Java 21 + Spring Boot
 - REST APIs
 - Spring Validation
-- H2 for local development
-- PostgreSQL-ready configuration
+- Direct SMTP email delivery for contact form submissions (no database required)
 - Google Drive links for certificates/resume
 - Contact form backed by Spring Boot
 
@@ -109,26 +108,6 @@ Recommended Google Drive sharing:
 
 You can use the same pattern for the resume link.
 
-## PostgreSQL
-
-The default profile uses H2 so the project runs immediately.
-
-To use PostgreSQL, create a database named `subash_portfolio`, then set environment variables:
-
-```bash
-DB_URL=jdbc:postgresql://localhost:5432/subash_portfolio
-DB_USERNAME=postgres
-DB_PASSWORD=your_password
-```
-
-Run with:
-
-```bash
-mvn spring-boot:run
-```
-
-The included `application.yml` uses these environment variables.
-
 ## Production checklist
 
 - Replace all Drive placeholders.
@@ -140,20 +119,19 @@ The included `application.yml` uses these environment variables.
 - Change `allowed-origins` from `http://localhost:4200` to your production domain.
 - Add rate limiting / CAPTCHA to the contact endpoint before public deployment.
 
-## Render and Neon deployment
+## Render deployment
 
 This repository includes `render.yaml` for deploying the Angular frontend and Spring Boot backend on Render. The frontend is a Render Static Site and the backend is a Render Web Service. GitHub Pages is not required for this setup.
 
-The backend is configured for a PostgreSQL-compatible Neon database. In Render, set these backend environment variables from the Neon connection details:
+The contact endpoint sends the submitted message directly by email and does not require a database. Configure the backend's mail credentials and frontend origin in Render:
 
 ```text
-DB_URL=jdbc:postgresql://HOST/DATABASE?sslmode=require
-DB_USERNAME=NEON_USERNAME
-DB_PASSWORD=NEON_PASSWORD
-DB_DRIVER=org.postgresql.Driver
+MAIL_USERNAME=your-sending-gmail@gmail.com
+MAIL_PASSWORD=your-gmail-app-password
+CONTACT_RECIPIENT=subashgoud12345@gmail.com
 ALLOWED_ORIGINS=https://YOUR-FRONTEND.onrender.com
 ```
 
 Set `API_URL` on the frontend service to the deployed backend URL, for example `https://subash-portfolio-api.onrender.com`. The Render build generates the frontend runtime configuration from that value. Do not leave it empty in production, because the local fallback is `http://localhost:8080`.
 
-Do not commit the Neon password or any other secret. Neon free-tier availability, storage, compute limits, and Render free-tier behavior can change over time; check the providers' current pricing pages before relying on them for permanent hosting.
+Do not commit email credentials or any other secret.
