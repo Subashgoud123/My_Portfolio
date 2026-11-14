@@ -2,7 +2,10 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
-const configuredApiUrl = (globalThis as { __API_URL__?: string }).__API_URL__;
+const pageHost = globalThis.location?.hostname;
+const configuredApiUrl = pageHost === 'localhost' || pageHost === '127.0.0.1'
+  ? 'http://localhost:8080'
+  : (globalThis as { __API_URL__?: string }).__API_URL__;
 
 export interface ContactPayload {
   name: string;

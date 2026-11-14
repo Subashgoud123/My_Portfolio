@@ -27,17 +27,35 @@ public class PortfolioController {
     public List<Map<String, Object>> experience() {
         return List.of(Map.of(
                 "company", "Accenture",
-                "role", "Packaged App Development Associate",
-                "period", "29 Sep 2024 - Current",
                 "location", "Hyderabad, India",
-                "highlights", List.of(
-                        "Migrated a legacy monolithic PrimeFaces application to a decoupled, API-first architecture.",
-                        "Developed an application with Java's Jersey Framework.",
-                        "Worked with Azure Virtual Machines, Functions and Key Vault services.",
-                        "Used Jira, Git, Argo CD and GitHub Actions with CI/CD workflows.",
-                        "Monitored applications using Grafana.",
-                        "Worked with GitHub Copilot in the IDE.",
-                        "Collaborated with business stakeholders to deliver features and troubleshoot production issues."
+                "employmentType", "Full-time",
+                "period", "Sep 2024 - Present",
+                "duration", "2 yrs 2 mos",
+                "roles", List.of(
+                        Map.of(
+                                "title", "Packaged App Development Analyst",
+                                "period", "Nov 2026 - Present",
+                                "duration", "",
+                                "location", "Hyderabad, India",
+                                "current", true,
+                                "highlights", List.of(
+                                        "Migrated a legacy monolithic PrimeFaces application to a decoupled, API-first architecture.",
+                                        "Developed an application with Java's Jersey Framework.",
+                                        "Worked with Azure Virtual Machines, Functions and Key Vault services.",
+                                        "Used Jira, Git, Argo CD and GitHub Actions with CI/CD workflows.",
+                                        "Monitored applications using Grafana.",
+                                        "Worked with GitHub Copilot in the IDE.",
+                                        "Collaborated with business stakeholders to deliver features and troubleshoot production issues."
+                                )
+                        ),
+                        Map.of(
+                                "title", "Packaged App Development Associate",
+                                "period", "Sep 2024 - Nov 2026",
+                                "duration", "2 yrs 2 mos",
+                                "location", "Hyderabad, India",
+                                "current", false,
+                                "highlights", List.of()
+                        )
                 )
         ));
     }

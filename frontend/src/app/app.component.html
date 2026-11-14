@@ -136,15 +136,29 @@
     <div class="timeline">
       <article class="timeline-item reveal" *ngFor="let job of experience">
         <div class="timeline-dot"></div>
-        <div class="timeline-date">{{ job.period }}</div>
+        <div class="timeline-date">{{ job.period }}<ng-container *ngIf="job.duration"> · {{ job.duration }}</ng-container></div>
         <div class="timeline-content">
-          <div class="role-line">
-            <div><h3>{{ job.role }}</h3><p>{{ job.company }} · {{ job.location }}</p></div>
-            <span class="current-badge">CURRENT</span>
+          <div class="company-head">
+            <div class="company-mark">{{ job.company.charAt(0) }}</div>
+            <div>
+              <h3>{{ job.company }}</h3>
+              <p>{{ job.employmentType }} · {{ job.location }}</p>
+            </div>
           </div>
-          <ul>
-            <li *ngFor="let point of job.highlights">{{ point }}</li>
-          </ul>
+          <div class="role-rail">
+            <div class="role-node" *ngFor="let role of job.roles">
+              <div class="role-dot" [class.past]="!role.current"></div>
+              <div class="role-line">
+                <h4>{{ role.title }}</h4>
+                <span class="current-badge" *ngIf="role.current">CURRENT</span>
+              </div>
+              <p class="role-period">{{ role.period }}<ng-container *ngIf="role.duration"> · {{ role.duration }}</ng-container></p>
+              <p class="role-meta">{{ role.location }}</p>
+              <ul *ngIf="role.highlights.length">
+                <li *ngFor="let point of role.highlights">{{ point }}</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </article>
     </div>

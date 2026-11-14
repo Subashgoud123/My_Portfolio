@@ -175,11 +175,22 @@ pre { margin: 0; padding: 30px; overflow: auto; font: 14px/1.9 'Space Grotesk', 
 .timeline-date { font-size: 11px; color: var(--accent); letter-spacing: .08em; margin-bottom: 12px; }
 .timeline-content { padding: 28px; border: 1px solid var(--line); border-radius: 18px; background: rgba(255,255,255,.018); transition: .3s; }
 .timeline-content:hover { border-color: rgba(110,231,255,.35); transform: translateX(7px); background: rgba(110,231,255,.025); }
-.role-line { display: flex; justify-content: space-between; gap: 15px; }
-.role-line h3 { font: 600 26px 'Space Grotesk'; margin: 0; }
-.role-line p { color: var(--muted); margin: 7px 0 0; }
+.company-head { display: flex; align-items: center; gap: 16px; }
+.company-mark { width: 52px; height: 52px; flex: none; border-radius: 12px; display: grid; place-items: center; background: #132033; border: 1px solid var(--line); color: white; font: 700 22px 'Space Grotesk'; }
+.company-head h3 { font: 600 26px 'Space Grotesk'; margin: 0; }
+.company-head p { color: var(--muted); margin: 6px 0 0; }
+.role-rail { margin: 28px 0 0 18px; }
+.role-node { position: relative; padding: 0 0 28px 32px; }
+.role-node:last-child { padding-bottom: 0; }
+.role-node:not(:last-child)::before { content: ''; position: absolute; left: 4px; top: 16px; bottom: 0; width: 2px; background: rgba(110,231,255,.28); }
+.role-dot { position: absolute; left: 0; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 16px rgba(110,231,255,.45); }
+.role-dot.past { background: var(--bg2); border: 2px solid rgba(110,231,255,.7); box-shadow: none; }
+.role-line { display: flex; justify-content: space-between; align-items: flex-start; gap: 15px; }
+.role-line h4 { font: 600 20px 'Space Grotesk'; margin: 0; }
+.role-period { color: #d5e4f2; margin: 8px 0 0; font-size: 14px; }
+.role-meta { color: var(--muted); margin: 4px 0 0; font-size: 13px; }
 .current-badge { height: fit-content; border: 1px solid rgba(126,242,154,.25); color: var(--green); border-radius: 999px; padding: 6px 10px; font-size: 9px; font-weight: 800; }
-.timeline-content ul { margin: 28px 0 0; padding-left: 20px; color: #9cacbf; line-height: 1.8; }
+.timeline-content ul { margin: 16px 0 0; padding-left: 20px; color: #9cacbf; line-height: 1.8; }
 .timeline-content li { padding-left: 6px; margin-bottom: 6px; }
 
 .filter-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 25px; }
