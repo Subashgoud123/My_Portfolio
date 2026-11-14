@@ -45,6 +45,7 @@ public class PortfolioController {
     @GetMapping("/education")
     public List<Map<String, Object>> education() {
         return List.of(
+                Map.of("degree", "Master of Technology", "field", "Artificial Intelligence and Machine Learning", "institution", "Birla Institute of Technology and Science - WILP", "location", "Hyderabad, India", "year", "Currently Pursuing", "score", ""),
                 Map.of("degree", "Bachelor of Technology", "field", "Electronics and Communication Engineering", "institution", "G. Pulla Reddy Engineering College", "location", "Kurnool, Andhra Pradesh", "year", "2024", "score", "CGPA 8.9"),
                 Map.of("degree", "Intermediate", "field", "—", "institution", "Narayana Junior College", "location", "Kurnool, Andhra Pradesh", "year", "2020", "score", "CGPA 9.6"),
                 Map.of("degree", "Secondary", "field", "—", "institution", "Bhashyam Public High School", "location", "Kurnool, Andhra Pradesh", "year", "2018", "score", "CGPA 9.8")
